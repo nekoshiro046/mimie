@@ -3,12 +3,17 @@ var thisAddress;
 var thisLatitude,thisLongitude;
 
 function init() {
-    map_101 = L.map('map_101').setView([35.15, 136.9], 12);
+    map_101 = L.map('map_101',{
+    center:[35.15,136.9],
+    zoom: 12,
+    zoomControl:false,
+	});
+
     mapLink = '<a href="https://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; ' + mapLink,
-        maxZoom: 20
+        maxZoom: 20,
     }).addTo(map_101);
 
     var noiseName = ["car_noise","human_noise","crowds_noise","animal_noise","construction_noise","rain_noise"];
