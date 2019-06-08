@@ -1,6 +1,16 @@
 var popNow; //今開いているポップの番号
 
 $(function(){
+	//オープニングムービー
+	$('#movielogo').on('ended',function(){
+		// $('header,footer,.main').fadeIn(2000);
+		$('#map_101').css('display','none'); //とりあえず読み込んで後から非表示
+		$('.opening').fadeOut(2000);
+
+		// $('#opening,#mask').remove();  
+	});
+
+
 
 	// ボタンを押して再生、２回目以降はpopupが出る
 	$('.main button').click(function(){
@@ -8,12 +18,12 @@ $(function(){
 
 		var num = btnId.slice(-1); //idの末尾(＝数字)
 
-		var isPlay = $('#nowplaying'+num).css("display")!=="none"; //そのプリセットが再生中かどうか
+		var isPlay = $('#nowplaying'+num).css('display')!=='none'; //そのプリセットが再生中かどうか
 
 		if(isPlay){
 			$('#overlay').css('display','block');
 			$('#popup'+num).slideDown();
-			// alert(pre_popId);
+			
 			popNow = num;
 
 		}else{
@@ -22,33 +32,37 @@ $(function(){
 			$('#img'+num+'_m').css('display','none');
 			$('#img'+num+'_c').css('display','block');
 
+
 			var noiseName;
 			switch(num){
-				case 1:
-				noiseName = "car_noise";
+				case '1':
+				noiseName = 'car_noise';
 				break;
 
-				case 2:
-				noiseName = "crowds_noise";
+				case '2':
+				noiseName = 'crowds_noise';
 				break;
 
-				case 3:
-				noiseName = "human_noise";
+				case '3':
+				noiseName = 'human_noise';
 				break;
 
-				case 4:
-				noiseName = "animal_noise";
+				case '4':
+				noiseName = 'animal_noise';
 				break;
 
-				case 5:
-				noiseName = "construction_noise";
+				case '5':
+				noiseName = 'construction_noise';
 				break;
 
-				case 6:
-				noiseName = "rain_noise";
+				case '6':
+				noiseName = 'weather_noise';
+				break;
 			}
+			// alert(noiseName);
 
 			setMarkerHere(noiseName);
+			sendNoise(noiseName);
 		}
 		
 		$('#playIcon'+popNow).css('display','none');
@@ -79,7 +93,7 @@ $(function(){
 		$('#nowplaying'+popNow).css('display','block');
 
 		$('#img'+popNow+'_m').css('display','none');
-		$('#img'+popNow+'_m').css('display','block');
+		$('#img'+popNow+'_c').css('display','block');
 
 	});
 
@@ -108,7 +122,11 @@ $(function(){
 		$('#L-off').css('display','block');
 		$('#R-on').css('display','block');
 		$('#R-off').css('display','none');
+
+		$('body,html').animate({
+			scrollTop:0},0);
 	});
+
 });
 
 
